@@ -53,6 +53,11 @@
   border-radius: 25px;
 }
 
+.home-box {
+  display: flex;
+  flex-direction: column;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
