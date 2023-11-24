@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Country = () => {
   const { countryId } = useParams();
@@ -49,6 +50,7 @@ const Country = () => {
           </div>
         );
       })}
+      <Link to="/">Go Back to Main Page</Link>
     </div>
   );
 };
