@@ -1,6 +1,8 @@
 import CountryList from "../Components/CountryList";
 import Search from "../Components/Search";
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 interface Country {
   name: {
     common: string;
@@ -9,14 +11,18 @@ interface Country {
 }
 
 const Home = () => {
-  const [countries, setCountries] = useState<Country[]>([]);
-  const [originalCountries, setOriginalCountries] = useState<Country[]>([]);
+  const [countries, setCountries] = useState<Country[]>([]); //countries array for edit
+  const [originalCountries, setOriginalCountries] = useState<Country[]>([]); //CONST countries array
+  const allCountries = originalCountries.map((country) =>
+    country.name.common.toLowerCase()
+  );
 
   async function getCountries() {
     const res = await fetch("https://restcountries.com/v3.1/all");
     const data = await res.json();
     setCountries(data);
     setOriginalCountries(data);
+    console.log(data);
   }
 
   useEffect(() => {
@@ -24,16 +30,33 @@ const Home = () => {
   }, []);
 
   const handleSearch = (value: any) => {
-    const newCountries = originalCountries.filter((country: any) =>
+    const newInputCountries = countries.filter((country: any) =>
       country.name.common.toLowerCase().includes(value.toLowerCase())
     );
-    setCountries(newCountries);
+    setCountries(newInputCountries);
+  };
+
+  const handleReset = () => {
+    setCountries(originalCountries);
+  };
+
+  const handleSelectRender = (country: any) => {
+    const newSelectCountries = originalCountries.filter((value: any) =>
+      value.name.common.toLowerCase().includes(country.toLowerCase())
+    );
+    setCountries(newSelectCountries);
   };
 
   return (
     <div className="home-box">
-      <h2>Poznaj kraje świata!</h2>
-      <Search handleSearch={handleSearch} />
+      <Link to="/" onClick={handleReset}>
+        Poznaj kraje świata!
+      </Link>
+      <Search
+        allCountries={allCountries}
+        handleSearch={handleSearch}
+        handleSelectRender={handleSelectRender}
+      />
       <CountryList countries={countries} />
     </div>
   );

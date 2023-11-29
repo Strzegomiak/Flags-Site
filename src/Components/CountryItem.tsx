@@ -8,7 +8,7 @@ function CountryItem(props: any) {
       <Link to={"/Country/" + props.country.name.common}>
         <img className="image-flag" src={props.country.flags.png} />
 
-        <h2>Miasto: {props.country.name.common}</h2>
+        <h2>Kraj: {props.country.name.common}</h2>
         <h2>Stolica: {props.country.capital}</h2>
       </Link>
     </div>
