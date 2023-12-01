@@ -4,7 +4,13 @@ function CountryList(props: any) {
   return (
     <div className="country">
       {props.countries.map((country: any) => {
-        return <CountryItem country={country} />;
+        return (
+          <CountryItem
+            favorites={props.favorites}
+            setFavorites={props.setFavorites}
+            country={country}
+          />
+        );
       })}
     </div>
   );

@@ -23,13 +23,29 @@ function Search(props: any) {
         Search
       </button>
       <div>
-        <h2>Wybierz kraj:</h2>
+        <h2>Choose continent:</h2>
         <select value={selectedOption} onChange={handleSelectChange}>
-          <option value="">Wybierz kraj</option>
-          {props.allCountries.map((country: any) => (
-            <option value={country}>{country}</option>
+          <option value="">Choose continent</option>
+          {props.allContinents.map((continent: any) => (
+            <option value={continent}>{continent}</option>
           ))}
         </select>
+      </div>
+      <div>
+        <div>
+          <button
+            type="button"
+            onClick={() => props.handleFavoriteRender("favorites")}
+          >
+            Show favorites
+          </button>
+          <button
+            type="button"
+            onClick={() => props.handleFavoriteRender("all")}
+          >
+            Show All
+          </button>
+        </div>
       </div>
     </div>
   );
